@@ -2,12 +2,16 @@ package com.LucasVicentee.ProjetoWeb.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -17,6 +21,8 @@ public class User implements Serializable {
     private String email;
     private String fone;
     private String password;
+
+    private List<Order> orders = new ArrayList<>(); // Adicionando a relação de muitos para um da classe Order
 
     public User() {
 
@@ -68,6 +74,10 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override
