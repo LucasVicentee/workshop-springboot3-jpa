@@ -22,6 +22,7 @@ public class User implements Serializable {
     private String fone;
     private String password;
 
+    @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>(); // Adicionando a relação de muitos para um da classe Order
 
     public User() {

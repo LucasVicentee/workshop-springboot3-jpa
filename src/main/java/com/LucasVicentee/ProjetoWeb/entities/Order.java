@@ -1,14 +1,14 @@
 package com.LucasVicentee.ProjetoWeb.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_order")
 public class Order implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -18,7 +18,9 @@ public class Order implements Serializable {
     private Long id;
     private Instant moment;
 
-    private User client; // Criano a associação de muitos para um da classe User
+    @ManyToOne // Configurando a chave estrangeira da tabela Client na tabela Order
+    @JoinColumn(name = "client_id") // Configurando o nome da chave estrangeira
+    private User client; // Criando a associação de muitos para um da classe User
 
     public Order() {
 
