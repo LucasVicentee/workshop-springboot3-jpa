@@ -1,5 +1,6 @@
 package com.LucasVicentee.ProjetoWeb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -22,6 +23,8 @@ public class User implements Serializable {
     private String fone;
     private String password;
 
+
+    @JsonIgnore // Faz com que o JSON seja ignorada, assim deixando de ficar em um looping infinito por conta da relação de um para muitos em algum dos lados
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>(); // Adicionando a relação de muitos para um da classe Order
 
