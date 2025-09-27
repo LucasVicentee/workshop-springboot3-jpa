@@ -21,7 +21,8 @@ public class Product {
     private double price;
     private String imgUrl;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id")) // Este passo é realizado para estabelecer a relação de muito para muitos na relação entre duas tabelas
     private Set<Category> categories = new HashSet<>();
 
     public Product() {
