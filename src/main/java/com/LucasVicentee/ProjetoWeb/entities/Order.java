@@ -7,7 +7,9 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -27,6 +29,9 @@ public class Order implements Serializable {
     @ManyToOne // Configurando a chave estrangeira da tabela Client na tabela Order
     @JoinColumn(name = "client_id") // Configurando o nome da chave estrangeira
     private User client; // Criando a associação de muitos para um da classe User
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() {
 
@@ -55,10 +60,6 @@ public class Order implements Serializable {
         this.moment = moment;
     }
 
-    public User getClient() {
-        return client;
-    }
-
     public OrderStatus getOrderStatus() throws IllegalAccessException {
         return OrderStatus.valueOf(orderStatus);
     }
@@ -69,8 +70,16 @@ public class Order implements Serializable {
         }
     }
 
+    public User getClient() {
+        return client;
+    }
+
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     @Override
