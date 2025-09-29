@@ -67,6 +67,14 @@ public class OrderItem implements Serializable {
         this.quantity = quantity;
     }
 
+    // Inicio dos Métodos
+
+    public Double getSubTotal() {
+        return price * quantity;
+    }
+
+    // Fim dos Métodos
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof OrderItem orderItem)) return false;
