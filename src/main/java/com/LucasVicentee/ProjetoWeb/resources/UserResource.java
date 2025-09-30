@@ -37,4 +37,10 @@ public class UserResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri(); // Maneira obrigatória de criar uma URI que é o tipo esperado de uma requisição de dados POST que é a maneira de se enviar os dados via HTTP. O resultado desta requisição será o 201 Created
         return ResponseEntity.created(uri).body(obj);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
